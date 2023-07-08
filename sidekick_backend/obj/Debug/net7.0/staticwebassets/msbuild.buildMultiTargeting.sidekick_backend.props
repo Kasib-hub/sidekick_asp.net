@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/sidekick_backend.props" />
+</Project>
