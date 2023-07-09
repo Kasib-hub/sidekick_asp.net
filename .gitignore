@@ -1,6 +1,7 @@
 # Build results
 bin/
 obj/
+.vscode/
 
 # NuGet packages
 *.nupkg
