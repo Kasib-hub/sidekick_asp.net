@@ -17,23 +17,27 @@ namespace sidekick_backend.Controllers
   {
     // instantiate a solution object
     // private static Solution solution1 = new Solution();
+
+    // instatiate a list of solutions
     private static List<Solution> solutions = new List<Solution> {
       new Solution(),
-      new Solution { Title = "new solution"}
+      new Solution { Title = "new solution", Id = 1}
     };
 
+    // this is a get request for all solutions
     [HttpGet("GetAll")]
     public ActionResult<List<Solution>> Get()
     {
       return Ok(solutions);
     }
 
-    // needs a http attribute, can also make a query here?
-    [HttpGet]
-    public ActionResult<Solution> GetSingle()
+    // needs a http attribute, can also make a query here
+    // I'm going to return a single solution by id
+    [HttpGet("{Id}")]
+    public ActionResult<Solution> GetSingle(int Id)
     {
       // 200 status code
-      return Ok(solutions[0]);
+      return Ok(solutions.FirstOrDefault(solution => solution.Id == Id));
 
       // 400 status code would be BadRequest, 404 for Notfound
     }

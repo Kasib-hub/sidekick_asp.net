@@ -17,6 +17,12 @@ namespace sidekick_backend.Models;
     public int UserId { get; set; }
     public string Units { get; set; } = string.Empty!;
 
+    // property for decimal field to 2 decimal places
+    public decimal SourceConc { get; set; }
+    public decimal SourceVol { get; set; }
+    public decimal TargetConc { get; set; }
+    public decimal TargetVol { get; set; }
+
 
 
 
