@@ -23,7 +23,4 @@ namespace sidekick_backend.Models;
     public decimal TargetConc { get; set; }
     public decimal TargetVol { get; set; }
 
-
-
-
   }

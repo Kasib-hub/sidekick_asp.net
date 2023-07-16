@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using sidekick_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // a controller can return one entry or multiple from the db as list
@@ -19,6 +18,7 @@ namespace sidekick_backend.Controllers
     // private static Solution solution1 = new Solution();
 
     // instatiate a list of solutions
+    // the actionResult is a generic class that represents the result of an action method where the action method returns a single object, Action methods are a part of the ASP.NET MVC framework. Define the behaviour of HTTP requests to a controller's action method.
     private static List<Solution> solutions = new List<Solution> {
       new Solution(),
       new Solution { Title = "new solution", Id = 1}
@@ -41,7 +41,16 @@ namespace sidekick_backend.Controllers
 
       // 400 status code would be BadRequest, 404 for Notfound
     }
-    // That was for single object, here we can get an array of objects
+    
+    // this is a post request to create a new solution
+    [HttpPost]
+    public ActionResult<Solution> CreateSolution(Solution solution)
+    {
+      // add the solution to the list
+      solutions.Add(solution);
+      // return the solution
+      return Ok(solution);
+    }
 
   }
 }
