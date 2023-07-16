@@ -1,5 +1,6 @@
 global using sidekick_backend.Models;
 global using sidekick_backend.Services.SolutionService;
+global using sidekick_backend.Dtos.Solution;
 
 var builder = WebApplication.CreateBuilder(args);
 
