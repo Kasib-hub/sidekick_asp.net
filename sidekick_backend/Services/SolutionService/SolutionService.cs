@@ -18,28 +18,31 @@ namespace sidekick_backend.Services.SolutionService
     new Solution(),
     new Solution { Title = "new solution", Id = 1}
   };
-    public async Task<List<Solution>> CreateSolution(Solution newSolution)
+    // using the service response class to return the data
+    public async Task<ServiceResponse<List<Solution>>> CreateSolution(Solution newSolution)
     {
-      // add the solution to the list
+      
+      var serviceResponse = new ServiceResponse<List<Solution>>(); // instantiate a new service response
       solutions.Add(newSolution);
+      serviceResponse.Data = solutions; // set the data to the list of solutions
       // return the solution
-      return solutions;
+      return serviceResponse;
     }
 
-    public async Task<List<Solution>> GetAllSolutions()
+    public async Task<ServiceResponse<List<Solution>>> GetAllSolutions()
     {
-      return solutions;
+      var serviceResponse = new ServiceResponse<List<Solution>>();
+      serviceResponse.Data = solutions;
+      return serviceResponse;
     }
 
-    public async Task<Solution> GetSolutionById(int Id)
+    public async Task<ServiceResponse<Solution>> GetSolutionById(int Id)
     {
       // account for the case where the solution is not found and is null
-      var solution = solutions.FirstOrDefault(solution => solution.Id == Id);
-      if (solution is not null)
-      {
-        return solution;
-      }
-      throw new Exception("Solution not found");
+      var serviceResponse = new ServiceResponse<Solution>();
+      var solution = solutions.FirstOrDefault(s => s.Id == Id);
+      serviceResponse.Data = solution;
+      return serviceResponse;
     }
   }
 }

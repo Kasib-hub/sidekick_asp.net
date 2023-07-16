@@ -35,7 +35,7 @@ namespace sidekick_backend.Controllers
 
     // this is a get request for all solutions
     [HttpGet("GetAll")]
-    public async Task<ActionResult<List<Solution>>> Get()
+    public async Task<ActionResult<ServiceResponse<List<Solution>>>> Get()
     {
       return Ok(await _solutionService.GetAllSolutions());
     }
@@ -43,7 +43,7 @@ namespace sidekick_backend.Controllers
     // needs a http attribute, can also make a query here
     // I'm going to return a single solution by id
     [HttpGet("{Id}")]
-    public async Task<ActionResult<Solution>> GetSingle(int Id)
+    public async Task<ActionResult<ServiceResponse<Solution>>> GetSingle(int Id)
     {
       // 200 status code
       return Ok(await _solutionService.GetSolutionById(Id));
@@ -53,7 +53,7 @@ namespace sidekick_backend.Controllers
     
     // this is a post request to create a new solution
     [HttpPost]
-    public async Task<ActionResult<Solution>> CreateSolution(Solution solution)
+    public async Task<ActionResult<ServiceResponse<Solution>>> CreateSolution(Solution solution)
     {
       return Ok(await _solutionService.CreateSolution(solution));
     }
