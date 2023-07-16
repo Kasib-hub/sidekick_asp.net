@@ -1,5 +1,6 @@
 // adding iservice to service class
 // SolutionService needs the methods from ISolutionService but the definition of those medthods in in the Controller
+// advantageous to make these requests async as they make changes/query to the database
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace sidekick_backend.Services.SolutionService
     new Solution(),
     new Solution { Title = "new solution", Id = 1}
   };
-    public List<Solution> CreateSolution(Solution newSolution)
+    public async Task<List<Solution>> CreateSolution(Solution newSolution)
     {
       // add the solution to the list
       solutions.Add(newSolution);
@@ -25,12 +26,12 @@ namespace sidekick_backend.Services.SolutionService
       return solutions;
     }
 
-    public List<Solution> GetAllSolutions()
+    public async Task<List<Solution>> GetAllSolutions()
     {
       return solutions;
     }
 
-    public Solution GetSolutionById(int Id)
+    public async Task<Solution> GetSolutionById(int Id)
     {
       // account for the case where the solution is not found and is null
       var solution = solutions.FirstOrDefault(solution => solution.Id == Id);

@@ -8,8 +8,8 @@ namespace sidekick_backend.Services.SolutionService
 {
   public interface ISolutionService
   {
-    List<Solution> GetAllSolutions();
-    Solution GetSolutionById(int Id);
-    List<Solution> CreateSolution(Solution newSolution);
+    Task<List<Solution>> GetAllSolutions();
+    Task<Solution> GetSolutionById(int Id);
+    Task<List<Solution>> CreateSolution(Solution newSolution);
   }
 }
