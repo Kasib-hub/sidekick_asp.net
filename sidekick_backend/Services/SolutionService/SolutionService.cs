@@ -32,7 +32,13 @@ namespace sidekick_backend.Services.SolutionService
 
     public Solution GetSolutionById(int Id)
     {
-       return solutions.FirstOrDefault(solution => solution.Id == Id);
+      // account for the case where the solution is not found and is null
+      var solution = solutions.FirstOrDefault(solution => solution.Id == Id);
+      if (solution is not null)
+      {
+        return solution;
+      }
+      throw new Exception("Solution not found");
     }
   }
 }

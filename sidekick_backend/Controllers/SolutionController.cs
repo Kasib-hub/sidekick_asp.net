@@ -24,11 +24,20 @@ namespace sidekick_backend.Controllers
       new Solution { Title = "new solution", Id = 1}
     };
 
+    // private readonly is a field modifier that means that this field can only be assigned in the constructor of this class
+    private readonly ISolutionService _solutionService;
+
+    // making a constructor for the service, having the service injected into the controller removes the need to instanatiate objects in the controller
+    public SolutionController(ISolutionService solutionService)
+    {
+      _solutionService = solutionService;
+    }
+
     // this is a get request for all solutions
     [HttpGet("GetAll")]
     public ActionResult<List<Solution>> Get()
     {
-      return Ok(solutions);
+      return Ok(_solutionService.GetAllSolutions());
     }
 
     // needs a http attribute, can also make a query here
@@ -37,7 +46,7 @@ namespace sidekick_backend.Controllers
     public ActionResult<Solution> GetSingle(int Id)
     {
       // 200 status code
-      return Ok(solutions.FirstOrDefault(solution => solution.Id == Id));
+      return Ok(_solutionService.GetSolutionById(Id));
 
       // 400 status code would be BadRequest, 404 for Notfound
     }
@@ -46,10 +55,7 @@ namespace sidekick_backend.Controllers
     [HttpPost]
     public ActionResult<Solution> CreateSolution(Solution solution)
     {
-      // add the solution to the list
-      solutions.Add(solution);
-      // return the solution
-      return Ok(solution);
+      return Ok(_solutionService.CreateSolution(solution));
     }
 
   }
